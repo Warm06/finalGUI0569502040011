@@ -473,14 +473,14 @@ st.dataframe(
 # แสดงผล car_output.csv
 # ==========================================
 
-st.divider()
+#st.divider()
 
-st.subheader("📊 Output ของ car_output.csv")
+#st.subheader("📊 Output ของ car_output.csv")
 
-output_df = pd.read_csv("car_output.csv")
+#output_df = pd.read_csv("car_output.csv")
 
-st.dataframe(
-    output_df,
-    use_container_width=True,
-    hide_index=True
-)
+#st.dataframe(
+ #   output_df,
+ #   use_container_width=True,
+ #   hide_index=True
+#)
