@@ -456,17 +456,17 @@ st.divider()
 # แสดงผล car.csv
 # ==========================================
 
-st.divider()
+#st.divider()
 
-st.subheader("📄 Output ของ car.csv")
+#st.subheader("📄 Output ของ car.csv")
 
-car_df = pd.read_csv("car.csv")
+#car_df = pd.read_csv("car.csv")
 
-st.dataframe(
-    car_df,
-    use_container_width=True,
-    hide_index=True
-)
+#st.dataframe(
+ #   car_df,
+  #  use_container_width=True,
+   # hide_index=True
+#)
 
 
 # ==========================================
