@@ -451,3 +451,36 @@ st.dataframe(
 
 
 st.divider()
+
+# ==========================================
+# แสดงผล car.csv
+# ==========================================
+
+st.divider()
+
+st.subheader("📄 Output ของ car.csv")
+
+car_df = pd.read_csv("car.csv")
+
+st.dataframe(
+    car_df,
+    use_container_width=True,
+    hide_index=True
+)
+
+
+# ==========================================
+# แสดงผล car_output.csv
+# ==========================================
+
+st.divider()
+
+st.subheader("📊 Output ของ car_output.csv")
+
+output_df = pd.read_csv("car_output.csv")
+
+st.dataframe(
+    output_df,
+    use_container_width=True,
+    hide_index=True
+)
