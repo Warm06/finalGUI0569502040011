@@ -1,16 +1,6 @@
-import pandas as pd
-
-# อ่านไฟล์ car.csv
-df = pd.read_csv("car.csv")
-
-# กำหนดราคารถยนต์
-car_price = 1000000
-
-# คำนวณดอกเบี้ยรวม
-df["total_rate"] = car_price * (df["rate"] / 100) * df["year"]
-
-# บันทึกเป็น car_output.csv
-df.to_csv("car_output.csv", index=False)
-
-print("สร้างไฟล์ car_output.csv เรียบร้อยแล้ว")
-print(df)
+company_name,rate,year,total_rate
+A,2.50,5,125000
+B,2.80,5,140000
+C,2.20,6,132000
+D,3.00,5,150000
+E,2.40,6,144000
