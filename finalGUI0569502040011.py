@@ -15,7 +15,7 @@ st.set_page_config(
 
 
 # ==========================================
-# ปรับแต่งสีหน้าเว็บไซต์
+# ปรับแต่งหน้าเว็บไซต์
 # ==========================================
 
 st.markdown("""
@@ -25,21 +25,42 @@ st.markdown("""
     background-color: #FFFFFF;
 }
 
-h1, h2, h3 {
-    color: #26364A;
+/* หัวข้อทั้งหมด */
+h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
 }
 
+/* ข้อความทั่วไป */
+p {
+    color: #000000 !important;
+}
+
+/* Caption */
+[data-testid="stCaptionContainer"] {
+    color: #000000 !important;
+}
+
+/* Metric */
 [data-testid="stMetric"] {
     background-color: #FFFFFF;
     padding: 10px;
 }
 
 [data-testid="stMetricLabel"] {
-    color: #26364A;
+    color: #000000 !important;
 }
 
 [data-testid="stMetricValue"] {
-    color: #26364A;
+    color: #000000 !important;
+}
+
+[data-testid="stMetricDelta"] {
+    color: #000000 !important;
+}
+
+/* ตาราง */
+[data-testid="stDataFrame"] {
+    color: #000000 !important;
 }
 
 </style>
@@ -77,7 +98,7 @@ df["monthly_payment"] = (
 
 
 # ==========================================
-# หาค่าที่ต้องแสดงบน Dashboard
+# หาค่าที่ต้องใช้ใน Dashboard
 # ==========================================
 
 lowest_interest = df["total_rate"].min()
@@ -117,14 +138,14 @@ st.divider()
 
 
 # ==========================================
-# แสดงข้อมูลสำคัญ 4 ช่อง
+# แสดงข้อมูลสำคัญ
 # ==========================================
 
 col1, col2, col3, col4 = st.columns(4)
 
 
 # ------------------------------------------
-# ช่องที่ 1 ราคารถยนต์
+# ราคารถยนต์
 # ------------------------------------------
 
 with col1:
@@ -136,7 +157,7 @@ with col1:
 
 
 # ------------------------------------------
-# ช่องที่ 2 ดอกเบี้ยต่ำสุด
+# ดอกเบี้ยรวมต่ำสุด
 # ------------------------------------------
 
 with col2:
@@ -149,7 +170,7 @@ with col2:
 
 
 # ------------------------------------------
-# ช่องที่ 3 ค่างวดต่ำสุด
+# ค่างวดต่อเดือนต่ำสุด
 # ------------------------------------------
 
 with col3:
@@ -162,7 +183,7 @@ with col3:
 
 
 # ------------------------------------------
-# ช่องที่ 4 ดอกเบี้ยรวมเฉลี่ย
+# ดอกเบี้ยรวมเฉลี่ย
 # ------------------------------------------
 
 with col4:
@@ -181,20 +202,20 @@ st.divider()
 # ==========================================
 
 st.subheader(
-    "📊 เปรียบเทียบดอกเบี้ยรวม "
-    "ยอดชำระรวม และค่างวดผ่อนต่อเดือน"
+    "📊 เปรียบเทียบดอกเบี้ยรวม ยอดชำระรวม "
+    "และค่างวดผ่อนต่อเดือน"
 )
 
 
 # ==========================================
-# สร้างกราฟ 2 ช่อง
+# แบ่งพื้นที่กราฟเป็น 2 ช่อง
 # ==========================================
 
 chart_col1, chart_col2 = st.columns(2)
 
 
 # ==========================================
-# กราฟดอกเบี้ยรวม
+# กราฟที่ 1 ดอกเบี้ยรวม
 # ==========================================
 
 with chart_col1:
@@ -211,26 +232,65 @@ with chart_col1:
         color="total_rate",
         color_continuous_scale=[
             "#F8E9E5",
-            "#F3D7D0",
+            "#E8B8B2",
             "#7A0019"
         ]
     )
 
+    # ตัวเลขบนแท่งกราฟ
     interest_chart.update_traces(
         texttemplate="%{text:,.2f}",
-        textposition="outside"
+        textposition="outside",
+        textfont=dict(
+            color="black"
+        )
     )
 
+    # ตั้งค่าสีตัวอักษรทั้งหมดในกราฟ
     interest_chart.update_layout(
         xaxis_title="บริษัทสินเชื่อ",
         yaxis_title="ดอกเบี้ยรวม (บาท)",
+
         coloraxis_colorbar_title="ดอกเบี้ย",
+
         plot_bgcolor="white",
         paper_bgcolor="white",
+
+        font=dict(
+            color="black"
+        ),
+
+        xaxis=dict(
+            tickfont=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
+        yaxis=dict(
+            tickfont=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
+        coloraxis_colorbar=dict(
+            tickfont=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
         margin=dict(
             l=20,
             r=20,
-            t=20,
+            t=30,
             b=20
         )
     )
@@ -242,7 +302,7 @@ with chart_col1:
 
 
 # ==========================================
-# กราฟค่างวดต่อเดือน
+# กราฟที่ 2 ค่างวดต่อเดือน
 # ==========================================
 
 with chart_col2:
@@ -266,22 +326,58 @@ with chart_col2:
         }
     )
 
+    # ตัวเลขบนแท่งกราฟ
     monthly_chart.update_traces(
         texttemplate="%{text:,.2f}",
-        textposition="outside"
+        textposition="outside",
+        textfont=dict(
+            color="black"
+        )
     )
 
+    # ตั้งค่าสีตัวอักษรทั้งหมดในกราฟ
     monthly_chart.update_layout(
         xaxis_title="บริษัทสินเชื่อ",
         yaxis_title="ค่างวด/เดือน (บาท)",
+
         plot_bgcolor="white",
         paper_bgcolor="white",
-        showlegend=True,
-        legend_title_text="บริษัทสินเชื่อ",
+
+        font=dict(
+            color="black"
+        ),
+
+        xaxis=dict(
+            tickfont=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
+        yaxis=dict(
+            tickfont=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
+        legend=dict(
+            font=dict(
+                color="black"
+            ),
+            title_font=dict(
+                color="black"
+            )
+        ),
+
         margin=dict(
             l=20,
             r=20,
-            t=20,
+            t=30,
             b=20
         )
     )
@@ -304,11 +400,14 @@ st.subheader(
 )
 
 
-# ทำสำเนาข้อมูลสำหรับแสดงผล
+# สร้างสำเนาข้อมูลสำหรับแสดง
 display_df = df.copy()
 
 
-# จัดรูปแบบตัวเลข
+# ==========================================
+# จัดรูปแบบข้อมูล
+# ==========================================
+
 display_df["rate"] = display_df["rate"].map(
     lambda x: f"{x:.2f}%"
 )
@@ -326,7 +425,10 @@ display_df["monthly_payment"] = display_df["monthly_payment"].map(
 )
 
 
-# เปลี่ยนชื่อคอลัมน์เป็นภาษาไทย
+# ==========================================
+# เปลี่ยนชื่อหัวตาราง
+# ==========================================
+
 display_df.columns = [
     "บริษัท",
     "ดอกเบี้ย/ปี",
