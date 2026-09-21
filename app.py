@@ -211,7 +211,3 @@ st.write(
     f"**บริษัท {lowest_monthly_company}** "
     f"จำนวน **฿{lowest_monthly:,.2f} ต่อเดือน**"
 )
-    display_df,
-    use_container_width=True,
-    hide_index=True
-)
