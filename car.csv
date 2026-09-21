@@ -4,12 +4,3 @@ company_name,rate,year
 บริษัท C,2.20,6
 บริษัท D,3.00,5
 บริษัท E,2.40,6
-st.subheader("📄 ข้อมูลจาก car.csv")
-
-car_df = pd.read_csv("car.csv")
-
-st.dataframe(
-    car_df,
-    use_container_width=True,
-    hide_index=True
-)
